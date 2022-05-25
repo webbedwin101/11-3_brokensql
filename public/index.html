@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/main.css">
     <title>secure sql</title>
 </head>
 <body>
     <!--mayhap this needs an action?-->
-    <form>
+    <form action="/api/users" method="POST">
         <label for="name">name</label>
-        <input id="name"></input>
-        </br>
+        <input id="name" name="name" type="text" required></input>
+        </br></br>
         <label for="username">username</label>
-        <input id="username">
-        </br>
+        <input id="username" name="username" type="text" required>
+        </br></br>
         <label for="email">email</label>
-        <input id="email">
-        </br>
+        <input id="email" name="email" type="email" required>
+        </br></br>
         <input type="submit">
-    </form>
     </form>
 </body>
 </html>
