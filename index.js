@@ -27,32 +27,27 @@ var connection = mysql.createConnection({
     // connection.query(`USE 113SQL;`);
     const body = req.body; 
     console.log(body); 
-    connection.query(
-      `INSERT INTO users (
-      name, 
-      username, 
-      email
-      ) VALUES (
-        @name,
-        @username,
-        @email
-        )
-        `, {
-          name: body.name,
-          username: body.username,
-          email: body.email,
-        });
+    const sqlstmt = 'INSERT INTO users (`name`, `username`, `email`) VALUES (?,?,?)';
+    let myOBJ= { name: body.name, username: body.username, email: body.email}; 
+    let params = [myOBJ.name, myOBJ.username, myOBJ.email]; 
+    
+    connection.query(sqlstmt, params, (err) => {
+      if (err) {
+        console.log(err)
+      }else{
         res.end('Added User'); 
-      })
+        console.log('record inserted'); 
+      }
+    });
+  }); 
 
+connection.query('SELECT * FROM `users`', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results);
+});
 
-// connection.query('SELECT * FROM users', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log('The solution is: ', results);
-// });
+connection.end();
 
-// connection.end();
-
-app.listen(PORT, () => console.log(`app started on ${PORT}`))
+app.listen(PORT, () => console.log(`app started on ${PORT}`)); 
 
 module.exports = app;
